@@ -84,30 +84,32 @@ const AchievementsSection = () => {
                 {achievement.postfix}
               </h2>
             ) : (
-              <div className="flex gap-4">
-                {achievement.icons?.map((icon, i) => {
-                  // Check if the icon is "firebase.png" or "mysql.png" for larger size
-                  const isLargeIcon = icon === "firebase.png" || icon === "mysql.png";
-                  return (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, y: -20 }} // Start off-screen
-                      animate={isVisible ? { opacity: 1, y: 0 } : {}} // Animate to on-screen
-                      transition={{ duration: 0.5, delay: i * 0.3 }} // Add delay for sliding effect
-                      className="flex justify-center items-center" // Center icon
-                    >
-                      <Image
-                        src={`/images/${icon}`}
-                        
-                        alt={`${icon.split(".")[0]} icon`}
-                        width={40} // Set larger width for specific icons
-                        height={40} // Set larger height for specific icons
-                         className="object-contain ml-2"
-                      />
-                    </motion.div>
-                  );
-                })}
-              </div>
+<div
+  className="grid gap-4 items-center justify-center mx-4 my-4 sm:my-0
+             grid-cols-3 sm:grid-cols-3 sm:grid-cols-3 lg:grid-cols-6"
+  id="achievements-section"
+>
+  {achievement.icons?.map((icon, i) => {
+    return (
+      <motion.div
+        key={i}
+        initial={{ opacity: 0, y: -20 }}
+        animate={isVisible ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, delay: i * 0.3 }}
+        className="flex justify-center items-center"
+      >
+        <Image
+          src={`/images/${icon}`}
+          alt={`${icon.split(".")[0]} icon`}
+          width={40}
+          height={40}
+          className="object-contain ml-2"
+        />
+      </motion.div>
+    );
+  })}
+</div>
+
             )}
             <p className="text-[#ADB7BE] text-base">{achievement.metric}</p>
           </div>
